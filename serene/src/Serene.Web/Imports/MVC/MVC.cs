@@ -7,6 +7,11 @@ public static partial class MVC
     {
         public static partial class ABC
         {
+            public static partial class Tabella
+            {
+                public const string TabellaIndex = "~/Modules/ABC/Tabella/TabellaIndex.cshtml";
+            }
+
             public static partial class Viste
             {
                 public const string PaginaProvaIndex = "~/Modules/ABC/Viste/PaginaProvaIndex.cshtml";
