@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.1855422">
+  <PropertyGroup>
+    <StartupCommand>
+    </StartupCommand>
+    <JavaScriptTestRoot>src\</JavaScriptTestRoot>
+    <JavaScriptTestFramework>Jest</JavaScriptTestFramework>
+    <BuildCommand>
+    </BuildCommand>
+    <ProductionBuildCommand>
+    </ProductionBuildCommand>
+    <ShouldRunNpmInstall>false</ShouldRunNpmInstall>
+    <BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
+    <DefaultItemExcludes>$(DefaultItemExcludes);out\**</DefaultItemExcludes>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Update="dist\index.js">
+      <PackagePath>dist\</PackagePath>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+      <Pack>true</Pack>
+    </None>
+  </ItemGroup>
+</Project>

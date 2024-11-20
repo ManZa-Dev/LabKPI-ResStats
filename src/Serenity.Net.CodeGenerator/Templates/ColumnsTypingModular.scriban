@@ -1,0 +1,11 @@
+
+export interface {{ColumnsClassName}} {
+    {{~for f in GridFields~}}
+    {{f.PropertyName}}: {{IMPORTFROM "@serenity-is/sleekgrid" "Column"}}<{{IMPORTFROM "./" + RowClassName RowClassName}}>;
+    {{~end~}}
+}
+
+export class {{ColumnsClassName}} extends {{SERENITYIMPORT "ColumnsBase"}}<{{IMPORTFROM "./" + RowClassName RowClassName}}> {
+    static readonly columnsKey = '{{ColumnsKey}}';
+    static readonly Fields = {{QIMPORT "fieldsProxy"}}<{{ColumnsClassName}}>();
+}

@@ -1,0 +1,175 @@
+<!--  Import della classe Charts.js (da spostare!!!) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<h1>Risultati Analisi Page</h1>
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Questo è solo un esempio</h2>
+
+    <!-- Riga per il layout con 3 colonne -->
+    <div class="row">
+        <!-- Colonna per il grafico a montagna (sinistra) -->
+        <div class="col-md-6">
+            <canvas id="mountainChart"></canvas>
+        </div>
+
+        <!-- Colonna per i due grafici a barre (destra) -->
+        <div class="col-md-6">
+            <!-- Grafico a barre con valori positivi -->
+            <div class="mb-4">
+                <canvas id="barChart1"></canvas>
+            </div>
+            <!-- Questo è il grafico con valori positivi e negativi -->
+            <div>
+                <canvas id="barChart2"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tabella di test con valori fittizzi -->
+<div class="container mt-5">
+    <div>
+        <table class="table-striped table">
+            <thead>
+                <tr>
+                    <th>Testa 1</th>
+                    <th>Testa 2</th>
+                    <th>Testa 3</th>
+                    <th>Testa 4</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>value</td>
+                    <td>value</td>
+                    <td>value</td>
+                    <td>value</td>
+                </tr>
+                <tr>
+                    <td>value</td>
+                    <td>value</td>
+                    <td>value</td>
+                    <td>value</td>
+                </tr>
+            </tbody>
+        </div>
+    </table>
+</div>
+
+
+<!-- AREA DI SCRIPT -->
+
+<script>
+    // Grafico a "Montagna" (sinistra)
+    var ctxMountain = document.getElementById('mountainChart').getContext('2d');
+    var mountainChart = new Chart(ctxMountain, {
+        type: 'line',
+        data: {
+            labels: ['2020', '2021', '2022', '2023', '2024', '2025'],
+            datasets: [{
+                label: 'Test grafico',
+                data: [5, 15, 25, 40, 20, 30],
+                fill: true,
+                backgroundColor: 'rgba(0, 123, 255, 0.4)',
+                borderColor: 'rgba(0, 123, 255, 1)',
+                // backgroundColor: 'rgba(75, 192, 192, 0.4)',
+                // borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false, // Permette di cambiare il rapporto di aspetto (Attenzione!)
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // AREA BORDI DELLA TABELLA
+    // var mountainCanvas = document.getElementById('mountainChart');
+    // mountainCanvas.style.border = '2px solid #343a40';
+    // mountainCanvas.style.borderRadius = '8px';
+
+    // Primo grafico a barre (destra)
+    var ctxBar1 = document.getElementById('barChart1').getContext('2d');
+    var barChart1 = new Chart(ctxBar1, {
+        type: 'bar',
+        data: {
+            labels: ['x', 'x', 'x', 'x', 'x', 'x'],
+            datasets: [{
+                label: 'Test valori',
+                data: [10, 20, 15, 30, 25, 18],
+                backgroundColor: 'rgba(13, 110, 253, 0.6)',  
+                borderColor: 'rgba(13, 110, 253, 1)',        
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false, // Impedisce di mantenere il rapporto di aspetto fisso
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // AREA BORDI DELLA TABELLA
+    // var barCanvas1 = document.getElementById('barChart1');
+    // barCanvas1.style.border = '2px solid #343a40';
+    // barCanvas1.style.borderRadius = '8px';
+
+    // Secondo grafico a barre (destra)
+    var ctxBar2 = document.getElementById('barChart2').getContext('2d');
+    var barChart2 = new Chart(ctxBar2, {
+        type: 'bar',
+        data: {
+            labels: ['x', 'x', 'x', 'x', 'x', 'x'],
+            datasets: [{
+                label: 'Test valori pos e neg',
+                data: [5, -10, 12, -15, 20, -17],
+                backgroundColor: function (context) {
+                    var value = context.dataset.data[context.dataIndex]; 
+                    return value < 0 ? 'rgba(220, 53, 69, 0.6)' : 'rgba(13, 110, 253, 0.6)';
+                },
+                borderColor: function (context) {
+                    var value = context.dataset.data[context.dataIndex];
+                    return value < 0 ? 'rgba(220, 53, 69, 1)' : 'rgba(13, 110, 253, 1)';
+                },
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,  // Permette di adattare il grafico alle dimensioni del contenitore
+            scales: {
+                y: {
+                    beginAtZero: false,  // L'asse Y non inizia necessariamente da zero
+                    min: -20,  // Imposta un minimo per l'asse Y per visualizzare i valori negativi
+                    max: 30,   // Imposta un massimo per l'asse Y per evitare che il grafico esca dai limiti
+                    ticks: {
+                        stepSize: 5,  // Imposta la distanza tra i tick
+                        callback: function (value) {
+                            if (value === 0) {
+                                return '0';
+                            }
+                            return value > 0 ? '+' + value : value;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // AREA BORDI DELLA TABELLA
+    // var barCanvas2 = document.getElementById('barChart2');
+    // barCanvas2.style.border = '2px solid #343a40';
+    // barCanvas2.style.borderRadius = '8px';
+</script>

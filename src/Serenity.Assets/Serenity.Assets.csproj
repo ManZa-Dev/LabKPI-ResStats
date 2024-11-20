@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <StaticWebAssetBasePath>/Serenity.Assets</StaticWebAssetBasePath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Using Remove="*" />
+    <None Include="Content\**\*.*" Exclude="*.back;*.orig;*.log">
+      <Pack>true</Pack>
+      <PackagePath>content\Content\</PackagePath>
+      <IncludeInPackage>true</IncludeInPackage>
+    </None>
+  </ItemGroup>
+</Project>

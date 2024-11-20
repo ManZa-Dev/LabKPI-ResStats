@@ -1,0 +1,73 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <ItemGroup>
+    <None Remove="Migrations\*.sql" />
+    <EmbeddedResource Include="Migrations\*.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="node_modules\%40serenity-is\extensions\package.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\sergen.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\test\tsconfig.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.ar.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.bn.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.cs.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.de.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.es.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.fa.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.fr.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.hi.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.id.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.it.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.ja.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.ko.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.nl.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.pl.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.pt-BR.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.pt.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.ro.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.ru.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.sv.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.tr.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.vi-VN.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.zh-CN.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.zh-TW.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\texts\resources\extensions.texts.__.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\tsconfig.base.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\tsconfig.json" />
+    <Content Include="node_modules\%40serenity-is\extensions\wwwroot\common-style.css" />
+    <Content Include="node_modules\%40serenity-is\extensions\wwwroot\common-theme.css" />
+    <Content Include="node_modules\%40serenity-is\extensions\wwwroot\index.css" />
+    <Content Include="node_modules\%40types\dompurify\package.json" />
+    <Content Include="node_modules\dompurify\package.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Serenity.Extensions" Version="$(Version)" Condition="!Exists('..\extensions\Serenity.Extensions.csproj')" />
+    <ProjectReference Include="..\extensions\Serenity.Extensions.csproj" Condition="Exists('..\extensions\Serenity.Extensions.csproj')" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="node_modules\%40serenity-is\extensions\.npmrc" />
+    <None Include="node_modules\%40serenity-is\extensions\Areas\Serenity.Extensions\Membership\PasswordActions\ResetPasswordEmail.cshtml" />
+    <None Include="node_modules\%40serenity-is\extensions\Areas\Serenity.Extensions\ModulePage\ModulePage.cshtml" />
+    <None Include="node_modules\%40serenity-is\extensions\Areas\Serenity.Extensions\Reporting\ReportPage.cshtml" />
+    <None Include="node_modules\%40serenity-is\extensions\Areas\Serenity.Extensions\_ViewImports.cshtml" />
+    <None Include="node_modules\%40serenity-is\extensions\Areas\Serenity.Extensions\_ViewStart.cshtml" />
+    <None Include="node_modules\%40serenity-is\extensions\jest.config.js" />
+    <None Include="node_modules\%40serenity-is\extensions\Serenity.Extensions.csproj" />
+    <None Include="node_modules\%40serenity-is\extensions\tsbuild.js" />
+    <None Include="node_modules\%40serenity-is\extensions\wwwroot\common-theme.js" />
+    <None Include="node_modules\%40types\dompurify\LICENSE" />
+    <None Include="node_modules\%40types\dompurify\README.md" />
+    <None Include="node_modules\dompurify\dist\purify.cjs.js" />
+    <None Include="node_modules\dompurify\dist\purify.cjs.js.map" />
+    <None Include="node_modules\dompurify\dist\purify.es.mjs" />
+    <None Include="node_modules\dompurify\dist\purify.es.mjs.map" />
+    <None Include="node_modules\dompurify\dist\purify.js" />
+    <None Include="node_modules\dompurify\dist\purify.js.map" />
+    <None Include="node_modules\dompurify\dist\purify.min.js" />
+    <None Include="node_modules\dompurify\dist\purify.min.js.map" />
+    <None Include="node_modules\dompurify\LICENSE" />
+    <None Include="node_modules\dompurify\README.md" />
+  </ItemGroup>
+</Project>

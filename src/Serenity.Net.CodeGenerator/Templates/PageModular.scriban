@@ -1,0 +1,18 @@
+﻿{{USING "Serenity.Web"}}{{if AspNetCore}}
+{{USING "Microsoft.AspNetCore.Mvc"}}{{else}}
+{{USING "System.Web.Mvc"}}{{end}}
+
+{{NAMESPACE ViewPageNamespace}}{{capture block~}}
+{{~if !AspNetCore~}}
+[RoutePrefix("{{ViewPageRoutePrefix}}"), Route("{action=index}")]
+{{~end~}}
+[PageAuthorize(typeof({{RowClassName}}))]
+public class {{ViewPageClassName}} : Controller
+{%{{}%}{{if AspNetCore}}
+    [Route("{{ViewPageRoute}}")]{{end}}
+    public ActionResult Index()
+    {
+        return this.GridPage<{{RowClassName}}>("{{ViewPageModulePath}}");
+    }
+}
+{{~end}}{{NAMESPACEBLOCK block~}}

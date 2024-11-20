@@ -1,0 +1,12 @@
+﻿{{USING "Serenity.ComponentModel"}}
+
+{{NAMESPACE FormNamespace}}{{capture block~}}
+[FormScript("{{FormKey}}")]
+[BasedOnRow(typeof({{RowClassName}}), CheckNames = true)]
+public class {{FormClassName}}
+{
+    {{~for x in FormFields~}}
+    public {{TYPEREF x.DataType}} {{x.PropertyName}} { get; set; }
+    {{~end~}}
+}
+{{~end}}{{NAMESPACEBLOCK block~}}

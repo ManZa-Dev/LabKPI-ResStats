@@ -1,0 +1,9 @@
+﻿
+@{{SERENITYIMPORT "Decorators"}}.registerClass('{{DialogFullName}}')
+export class {{DialogClassName}} extends {{SERENITYIMPORT "EntityDialog"}}<{{RowClassName}}, any> {
+    protected getFormKey() { return {{SERVERTYPEIMPORT FormClassName}}.formKey; }
+    protected getRowDefinition() { return {{SERVERTYPEIMPORT RowClassName}}; }
+    protected getService() { return {{SERVERTYPEIMPORT ServiceClassName}}.baseUrl; }
+
+    protected form = new {{FormClassName}}(this.idPrefix);
+}

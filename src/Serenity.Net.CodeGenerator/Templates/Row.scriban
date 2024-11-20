@@ -1,0 +1,79 @@
+{{~f = NET5Plus ? "f" : "F"~}}
+{{USING "Serenity.ComponentModel"}}
+{{USING "Serenity.Data"}}
+{{USING "Serenity.Data.Mapping"}}
+{{USING "System.ComponentModel"}}
+
+{{NAMESPACE ModuleNamespace}}{{capture block~}}
+[ConnectionKey("{{ConnectionKey}}"){{if Module}}, Module("{{Module}}"){{end}}, TableName("{{SchemaAndTable}}")]
+[DisplayName("{{Title}}"), InstanceName("{{Title}}"){{if EnableGenerateFields}}, GenerateFields{{end}}]
+[ReadPermission("{{Permission}}")]
+[ModifyPermission("{{Permission}}")]
+{{~if ServiceLookupPermission~}}
+[ServiceLookupPermission("{{ServiceLookupPermission}}")]
+{{~end~}}
+public sealed{{if EnableGenerateFields || EnableRowTemplates}} partial{{end}} class {{RowClassName}} : {{TYPEREFLIST RowBaseClassAndInterfaceList}}
+{   {{~if DeclareJoinConstants && !Joins.empty?~}}
+
+    {{~for j in Joins~}}
+    const string {{j.Alias}} = nameof({{j.Alias}});
+    {{~end~}}
+    {{~end~}}
+    {{~if EnableGenerateFields~}}
+    {{~for x in AllFields~}}
+
+    [{{ATTRREF x.AttributeList}}]
+    public {{TYPEREF x.PropertyType}} {{x.PropertyName}} { get => fields.{{x.PropertyName}}[this]; set => fields.{{x.PropertyName}}[this] = value; }
+    {{~end~}}
+    {{~else if EnableRowTemplates~}}
+
+    class RowTemplate
+    {   {{~for x in AllFields~}}
+
+        [{{ATTRREF x.AttributeList}}]
+        public {{TYPEREF x.PropertyType}} {{x.PropertyName}} { get; set; }
+        {{~end~}}
+    }
+    {{~if FieldsBaseClass != "Serenity.Data.RowFieldsBase"~}}
+
+    public partial class RowFields : {{TYPEREF FieldsBaseClass}}
+    {
+    }
+    {{~end~}}
+    {{~else~}}
+    {{~for x in AllFields~}}
+
+    [{{ATTRREF x.AttributeList}}]
+    public {{TYPEREF x.PropertyType}} {{x.PropertyName}} { get => fields.{{x.PropertyName}}[this]; set => fields.{{x.PropertyName}}[this] = value; }
+    {{~end~}}
+{{~if !NET5Plus~}}
+    {{~if Identity~}}
+
+    IIdField IIdRow.IdField => Fields.{{Identity}};
+    {{~end~}}
+    {{~if NameField~}}
+
+    StringField INameRow.NameField => Fields.{{NameField}};
+    {{~end~}}
+
+    public static readonly RowFields Fields = new RowFields().Init();
+
+    public {{RowClassName}}()
+        : base(Fields)
+    {
+    }
+{{~end~}}
+
+    public class RowFields : {{TYPEREF FieldsBaseClass}}
+    {
+        {{~for x in Fields~}}
+        public {{x.FieldType}}Field {{x.PropertyName}};
+        {{~end~}}
+
+        {{~for x in JoinFields~}}
+        public {{x.FieldType}}Field {{x.PropertyName}};
+        {{~end~}}
+    }
+    {{~end~}}
+}
+{{~end}}{{NAMESPACEBLOCK block~}}

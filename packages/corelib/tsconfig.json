@@ -1,0 +1,14 @@
+﻿{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "declarationDir": "./out",
+    "rootDir": "./src",
+    "paths": {
+    },
+    "outDir": "./out",
+    "target": "ES2017"
+  },
+  "include": [
+    "src"
+  ]
+}
