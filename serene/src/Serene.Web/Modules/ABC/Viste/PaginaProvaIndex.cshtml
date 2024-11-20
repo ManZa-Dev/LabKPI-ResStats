@@ -26,6 +26,13 @@
             </div>
         </div>
     </div>
+
+    <!-- Aggiunto grafico a barre // Alessio-->
+    <div class="row">
+        <div>
+            <canvas id="graficoBarre"></canvas>
+        </div>
+    </div>
 </div>
 
 <!-- Tabella di test con valori fittizzi -->
@@ -172,4 +179,56 @@
     // var barCanvas2 = document.getElementById('barChart2');
     // barCanvas2.style.border = '2px solid #343a40';
     // barCanvas2.style.borderRadius = '8px';
+
+
+    //SCRIPT PER IL GRAFICO A BARRE
+    // Grafico a Barre (destra)
+    const ctxBar = document.getElementById('graficoBarre').getContext('2d');
+    const barChart = new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+            labels: ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre','Ottobre','Novembre','Dicembre' ],
+            datasets: [
+                {
+                    label: 'Dataset 1',
+                    data: [12, 19, 3, 5, 2, 3, 7, 5, 16, 7, 19, 11],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    barThickness: 'flex',       // Usa 'flex' per adattare la larghezza della barra alla larghezza della categoria
+                    maxBarThickness: 100 
+                },
+                // {
+                //     label: 'Dataset 2',
+                //     data: [8, 15, 5, 10, 7, 4, 9],
+                //     borderColor: 'rgba(54, 162, 235, 1)',
+                //     backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                // }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Grafico a Barre'
+                }
+            },
+            scales: {
+            x: {
+                stacked: true,                 // Imposta le barre impilate per garantire una migliore distribuzione dello spazio
+                categoryPercentage: 1.0,       // Fa sì che le categorie riempiano completamente lo spazio disponibile
+                barPercentage: 1.0,            // Imposta la larghezza delle barre pari a quella della categoria
+                grid: {
+                    display: false             // Rimuove la griglia di sfondo per una visualizzazione più pulita
+                }
+            },
+            y: {
+                beginAtZero: true
+            }
+        }
+        }
+    });
 </script>
