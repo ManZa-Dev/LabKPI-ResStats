@@ -11,3 +11,22 @@
 .s-PermissionCheckEditor {
   min-height: 450px;
 }
+
+table-wrapper {
+  max-height: 400px; /* Limita l'altezza massima della tabella per permettere lo scrolling */
+  overflow-y: auto; /* Abilita lo scrolling verticale per la tabella */
+  overflow-x: hidden; /* Nasconde lo scrolling orizzontale */
+}
+
+.table-wrapper table thead th {
+  position: sticky;
+  top: 0;
+  background: #f8f9fa; /* Colore di sfondo per l'intestazione per mantenerla visibile */
+  z-index: 2; /* Assicura che l'intestazione rimanga sopra il corpo della tabella */
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4); /* Ombra per evidenziare la separazione */
+}
+
+.table-wrapper table tbody td {
+  position: relative;
+  z-index: 1;
+}
