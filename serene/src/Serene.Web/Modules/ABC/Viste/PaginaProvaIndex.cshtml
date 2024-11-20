@@ -253,19 +253,20 @@
     // Grafico a Barre (destra)
     let delayed = false;
 
+    // Primo grafico a barre (sinistra)
     const ctxAlessio = document.getElementById('graficoBarreMontagna').getContext('2d');
     const grafic0Barre = new Chart(ctxAlessio, {
         type: 'bar',
         data: {
             labels: ['01/2020', '03/2020', '05/2020', '07/2020', '09/2020', '11/2020',
-                     '01/2021', '03/2021', '05/2021', '07/2021', '09/2021', '11/2021',
-                     '01/2022', '03/2022', '05/2022', '07/2022', '09/2022', '11/2022',
-                     '01/2023', '03/2023', '05/2023', '07/2023', '09/2023', '11/2023',
-                     '01/2024', '03/2024', '05/2024', '07/2024', '09/2024', '11/2024'],
+                '01/2021', '03/2021', '05/2021', '07/2021', '09/2021', '11/2021',
+                '01/2022', '03/2022', '05/2022', '07/2022', '09/2022', '11/2022',
+                '01/2023', '03/2023', '05/2023', '07/2023', '09/2023', '11/2023',
+                '01/2024', '03/2024', '05/2024', '07/2024', '09/2024', '11/2024'],
             datasets: [{
                 label: 'Andamento Percentuale',
-                data: [5, 8, 15, 25, 35, 50, 70, 90, 120, 150, 180, 210, 250, 300, 350, 
-                       1000, 1200, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 6000, 7000, 8000, 8500, 9000],
+                data: [5, 8, 15, 25, 35, 50, 70, 90, 120, 150, 180, 210, 250, 300, 350,
+                    1000, 1200, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 6000, 7000, 8000, 8500, 9000],
                 fill: true,
                 backgroundColor: 'rgba(0, 123, 255, 0.7)', // Colore di riempimento
                 borderColor: 'rgba(0, 123, 255, 1)', // Colore del bordo
@@ -274,23 +275,24 @@
         },
         options: {
             animation: {
-              onComplete: () => {
-                delayed = true;
-              },
-              delay: (context) => {
-                let delay = 0;
-                if (context.type === 'data' && context.mode === 'default' && !delayed) {
-                  delay = context.dataIndex * 100 + context.datasetIndex * 100;
-                }
-                return delay;
-              },
+                onComplete: () => {
+                    delayed = true;
+                },
+                delay: (context) => {
+                    let delay = 0;
+                    if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                        delay = context.dataIndex * 100 + context.datasetIndex * 100;
+                    }
+                    return delay;
+                },
             },
             responsive: true,
             maintainAspectRatio: false,
+            aspectRatio: 0.3, // Ancora più schiacciato per ridurre l'altezza
             scales: {
                 x: {
                     grid: {
-                        display: true 
+                        display: true
                     },
                     ticks: {
                         autoSkip: false,  // Assicura che tutte le etichette siano mostrate
@@ -303,11 +305,11 @@
                     }
                 }
             },
-            categoryPercentage: 1.0, // Riempie completamente la categoria
-            barPercentage: 1.0, // Assicura che le barre occupino tutto lo spazio della categoria
+            categoryPercentage: 1.0, // Riempie completamente la categoria (spazio tra le categorie nullo)
+            barPercentage: 1.0, // Barra occupa tutta la categoria (spazio tra le barre nullo)
             plugins: {
                 legend: {
-                    display: true 
+                    display: true
                 },
                 tooltip: {
                     enabled: true // Mantiene i tooltip per esplorare i dati
@@ -317,69 +319,95 @@
     });
 
 
-    // AREA BORDI DELLA TABELLA
-    // var mountainCanvas = document.getElementById('mountainChart');
-    // mountainCanvas.style.border = '2px solid #343a40';
-    // mountainCanvas.style.borderRadius = '8px';
+    // Impostiamo l'altezza fissa per il canvas
+    document.getElementById('graficoBarreMontagna').style.height = '200px'; // Impostato su 200px per occupare meno spazio
 
-    // Primo grafico a barre (destra)
+    // Secondo grafico a barre (destra)
     var ctxBar1 = document.getElementById('barChart1').getContext('2d');
     var barChart1 = new Chart(ctxBar1, {
         type: 'bar',
         data: {
-            labels: ['x', 'x', 'x', 'x', 'x', 'x'],
+            labels: Array(30).fill('x'), // 30 etichette "x"
             datasets: [{
                 label: 'Test valori',
-                data: [10, 20, 15, 30, 25, 18],
-                backgroundColor: 'rgba(13, 110, 253, 0.6)',  
-                borderColor: 'rgba(13, 110, 253, 1)',        
-                borderWidth: 1
+                data: [
+                    5, 10, 12, 8, 6, 9, 7, 4, 3, 2, 6, 10, 8, 7, 5, 9, 4, 6, 11, 3,
+                    5, 3, 4, 8, 6, 9, 2, 6, 4, 7 // 30 valori ridotti per non superare 15
+                ],
+                backgroundColor: 'rgba(13, 110, 253, 0.6)',
+                borderColor: 'rgba(13, 110, 253, 1)',
+                borderWidth: 1,
+                maxBarThickness: 2 // Imposta uno spessore massimo molto basso per le barre
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false, // Impedisce di mantenere il rapporto di aspetto fisso
+            aspectRatio: 0.3, // Ancora più schiacciato per ridurre l'altezza
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: true,  // L'asse Y inizia da zero
+                    max: 15,  // Imposta il massimo per l'asse Y a 15
+                    ticks: {
+                        stepSize: 3,  // Imposta la distanza tra i tick
+                        callback: function (value) {
+                            return value;
+                        }
+                    }
+                },
+                x: {
+                    // Aggiungi questa parte per aumentare lo spazio tra le barre
+                    ticks: {
+                        autoSkip: false // Disabilita l'auto salto dei tick (se necessario)
+                    }
                 }
-            }
+            },
+            // Regola la larghezza delle barre e lo spazio tra le categorie
+            elements: {
+                bar: {
+                    barPercentage: 0.2, // Barra ancora più sottile
+                    categoryPercentage: 1, // Mantiene lo spazio tra le categorie (barre)
+                }
+            },
         }
     });
 
-    // AREA BORDI DELLA TABELLA
-    // var barCanvas1 = document.getElementById('barChart1');
-    // barCanvas1.style.border = '2px solid #343a40';
-    // barCanvas1.style.borderRadius = '8px';
+    // Impostiamo l'altezza fissa per il canvas
+    document.getElementById('barChart1').style.height = '200px'; // Impostato su 200px per occupare meno spazio
 
-    // Secondo grafico a barre (destra)
+    // Terzo grafico a barre (destra)
     var ctxBar2 = document.getElementById('barChart2').getContext('2d');
     var barChart2 = new Chart(ctxBar2, {
         type: 'bar',
         data: {
-            labels: ['x', 'x', 'x', 'x', 'x', 'x'],
+            labels: Array(30).fill('x'), // 30 etichette "x"
             datasets: [{
                 label: 'Test valori pos e neg',
-                data: [5, -10, 12, -15, 20, -17],
+                data: [
+                    5, -10, 12, -15, 10, -7, 5, -6, 3, -4, 9, -5, 8, -8, 6, -6, 7, -5, 5, -4,
+                    4, -3, 2, -5, 9, -2, 3, -1, 7, -6 // 30 valori modificati per non superare 15
+                ],
                 backgroundColor: function (context) {
-                    var value = context.dataset.data[context.dataIndex]; 
+                    var value = context.dataset.data[context.dataIndex];
                     return value < 0 ? 'rgba(220, 53, 69, 0.6)' : 'rgba(13, 110, 253, 0.6)';
                 },
                 borderColor: function (context) {
                     var value = context.dataset.data[context.dataIndex];
                     return value < 0 ? 'rgba(220, 53, 69, 1)' : 'rgba(13, 110, 253, 1)';
                 },
-                borderWidth: 1
+                borderWidth: 1,
+                maxBarThickness: 2 // Imposta uno spessore massimo per le barre
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,  // Permette di adattare il grafico alle dimensioni del contenitore
+            aspectRatio: 0.3, // Ancora più schiacciato per ridurre l'altezza
             scales: {
                 y: {
                     beginAtZero: false,  // L'asse Y non inizia necessariamente da zero
-                    min: -20,  // Imposta un minimo per l'asse Y per visualizzare i valori negativi
-                    max: 30,   // Imposta un massimo per l'asse Y per evitare che il grafico esca dai limiti
+                    min: -15,  // Imposta un minimo per l'asse Y per visualizzare i valori negativi
+                    max: 15,   // Imposta un massimo per l'asse Y per evitare che il grafico esca dai limiti
                     ticks: {
                         stepSize: 5,  // Imposta la distanza tra i tick
                         callback: function (value) {
@@ -390,9 +418,18 @@
                         }
                     }
                 }
+            },
+            elements: {
+                bar: {
+                    barPercentage: 0.2, // Barra ancora più sottile
+                    categoryPercentage: 1, // Mantiene lo spazio tra le categorie (barre)
+                }
             }
         }
     });
+
+    // Impostiamo l'altezza fissa per il canvas
+    document.getElementById('barChart2').style.height = '200px'; // Impostato su 200px per occupare meno spazio
 
     // AREA BORDI DELLA TABELLA
     // var barCanvas2 = document.getElementById('barChart2');
