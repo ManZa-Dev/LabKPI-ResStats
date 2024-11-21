@@ -1,4 +1,4 @@
-﻿
+
 namespace Serene;
 
 public static partial class MVC
@@ -53,6 +53,8 @@ public static partial class MVC
             public const string Error = "~/Views/Shared/Error.cshtml";
         }
 
+        // Modifica: Antonio Manzara -> 21/11
+        // Modificata la classe ABC in Statistiche, con relativo routing
         public static partial class Statistiche
         {
             public static partial class RisultatiAnalisi
