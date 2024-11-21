@@ -3,7 +3,7 @@ using Serenity.Demo.Northwind;
 
 namespace Serene.Common;
 
-public class PaginaProvaModel
+public class RisultatiModel
 {
     //public int OpenOrders { get; set; }
     //public int ClosedOrderPercent { get; set; }

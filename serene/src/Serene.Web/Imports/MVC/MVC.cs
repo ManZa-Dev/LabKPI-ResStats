@@ -5,19 +5,6 @@ public static partial class MVC
 {
     public static partial class Views
     {
-        public static partial class ABC
-        {
-            public static partial class Tabella
-            {
-                public const string TabellaIndex = "~/Modules/ABC/Tabella/TabellaIndex.cshtml";
-            }
-
-            public static partial class Viste
-            {
-                public const string PaginaProvaIndex = "~/Modules/ABC/Viste/PaginaProvaIndex.cshtml";
-            }
-        }
-
         public static partial class Common
         {
             public static partial class Dashboard
@@ -64,6 +51,19 @@ public static partial class MVC
             public const string _LayoutNoNavigation = "~/Views/Shared/_LayoutNoNavigation.cshtml";
             public const string _Sidebar = "~/Views/Shared/_Sidebar.cshtml";
             public const string Error = "~/Views/Shared/Error.cshtml";
+        }
+
+        public static partial class Statistiche
+        {
+            public static partial class RisultatiAnalisi
+            {
+                public const string RisultatiIndex = "~/Modules/Statistiche/RisultatiAnalisi/RisultatiIndex.cshtml";
+            }
+
+            public static partial class StatisticheTabelle
+            {
+                public const string TabellaIndex = "~/Modules/Statistiche/StatisticheTabelle/TabellaIndex.cshtml";
+            }
         }
     }
 }

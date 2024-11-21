@@ -3,10 +3,10 @@
 
 namespace Serene.Common.Pages;
 
-[Route("PaginaProva/[action]")]
-public class PaginaProva : Controller
+[Route("Risultati/[action]")]
+public class Risultati : Controller
 {
-    [PageAuthorize, HttpGet, Route("~/prova")]
+    [PageAuthorize, HttpGet, Route("~/risultati")]
 #if (Northwind)
     public ActionResult Index([FromServices] ITwoLevelCache cache, [FromServices] ISqlConnections sqlConnections)
     {
@@ -20,10 +20,10 @@ public class PaginaProva : Controller
 
         var s = Serenity.Demo.Northwind.ShipperRow.Fields;
 
-        var cachedModel = cache.GetLocalStoreOnly("DashboardDuePageModel", TimeSpan.FromMinutes(5),
+        var cachedModel = cache.GetLocalStoreOnly("RisultatiModel", TimeSpan.FromMinutes(5),
             o.GenerationKey, () =>
             {
-                var model = new DashboardDuePageModel();
+                var model = new RisultatiModel();
                 using (var connection = sqlConnections.NewFor<Serenity.Demo.Northwind.OrderRow>())
                 {
                     //model.OpenOrders = connection.Count<Serenity.Demo.Northwind.OrderRow>(
@@ -44,7 +44,7 @@ public class PaginaProva : Controller
                 return model;
             });
         //return View(MVC.Views.CommonDue.DashboardDue.DashboardDueIndex, cachedModel);
-        return View(MVC.Views.ABC.Viste.PaginaProvaIndex, cachedModel);
+        return View(MVC.Views.Statistiche.RisultatiAnalisi.RisultatiIndex, cachedModel);
     }
 #else
     public ActionResult Index()

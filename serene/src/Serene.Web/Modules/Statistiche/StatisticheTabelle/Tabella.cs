@@ -44,7 +44,7 @@ public class Tabella : Controller
                 return model;
             });
         //return View(MVC.Views.CommonDue.DashboardDue.DashboardDueIndex, cachedModel);
-        return View(MVC.Views.ABC.Tabella.TabellaIndex, cachedModel);
+        return View(MVC.Views.Statistiche.StatisticheTabelle.TabellaIndex, cachedModel);
     }
 #else
     public ActionResult Index()
