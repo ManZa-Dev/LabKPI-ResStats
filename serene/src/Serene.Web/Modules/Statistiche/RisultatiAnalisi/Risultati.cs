@@ -16,35 +16,7 @@ public class Risultati : Controller
         if (sqlConnections is null)
         	throw new System.ArgumentNullException(nameof(sqlConnections));
 
-        var o = Serenity.Demo.Northwind.OrderRow.Fields;
-
-        var s = Serenity.Demo.Northwind.ShipperRow.Fields;
-
-        var cachedModel = cache.GetLocalStoreOnly("RisultatiModel", TimeSpan.FromMinutes(5),
-            o.GenerationKey, () =>
-            {
-                var model = new RisultatiModel();
-                using (var connection = sqlConnections.NewFor<Serenity.Demo.Northwind.OrderRow>())
-                {
-                    //model.OpenOrders = connection.Count<Serenity.Demo.Northwind.OrderRow>(
-                    //    o.ShippingState == (int)Serenity.Demo.Northwind.OrderShippingState.NotShipped);
-                    //var closedOrders = connection.Count<Serenity.Demo.Northwind.OrderRow>(
-                    //    o.ShippingState == (int)Serenity.Demo.Northwind.OrderShippingState.Shipped);
-                    //var totalOrders = model.OpenOrders + closedOrders;
-                    //model.ClosedOrderPercent = (int)Math.Round(totalOrders == 0 ? 100 :
-                    //    ((double)closedOrders / totalOrders * 100));
-                    //model.CustomerCount = connection.Count<Serenity.Demo.Northwind.CustomerRow>();
-                    //model.ProductCount = connection.Count<Serenity.Demo.Northwind.ProductRow>();
-                    //model.TotalOrders = totalOrders;
-
-                    //model.Shippers = connection.Count<Serenity.Demo.Northwind.ShipperRow>();
-                    //model.Employers = connection.Count<Serenity.Demo.Northwind.EmployeeRow>();
-                    //model.Territories = connection.Count<Serenity.Demo.Northwind.TerritoryRow>();
-                }
-                return model;
-            });
-        //return View(MVC.Views.CommonDue.DashboardDue.DashboardDueIndex, cachedModel);
-        return View(MVC.Views.Statistiche.RisultatiAnalisi.RisultatiIndex, cachedModel);
+        return View(MVC.Views.Statistiche.RisultatiAnalisi.RisultatiIndex);
     }
 #else
     public ActionResult Index()
